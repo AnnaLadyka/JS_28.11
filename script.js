@@ -139,3 +139,31 @@
     let transcriptText = decoding(encryptionText, shift);
     console.log(`Расшифрованный текст: ${transcriptText}`);
 }
+
+/*7. Напишите программу, которая генерирует случайным образом новый пароль, состоящий из 8 чисел (параметром можно задавать длину) и возвращает результат. По желанию, доработайте функцию: сделайте генератор паролей из латинских символов, целых чисел и специальных символов: _-,.&*^$#@+=!; минимум один большой символ, одна цифра, один спец. символ.*/
+{
+    function generationPassword(length) {
+        if (length < 4) {
+            return ('Длина пароля должна быть минимум 4 символа.');
+        }
+
+        let capitalLetters = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+        let lowercaseLetters = 'qwertyuiopasdfghjklzxcvbnm';
+        let numbers = '1234567890';
+        let specialChar = '_-,.&*^$#@+=!';
+
+        let password = [capitalLetters.charAt(Math.floor(Math.random() * capitalLetters.length)), numbers.charAt(Math.floor(Math.random() * numbers.length)),specialChar.charAt(Math.floor(Math.random() * specialChar.length))];
+
+        let allCategories = capitalLetters + lowercaseLetters + numbers + specialChar;
+
+        for (let i = password.length; i < length; i++) {
+            let indexRandom = Math.floor(Math.random() * allCategories.length);
+            password.push(allCategories[indexRandom]);
+        }
+        password = password.join('');
+
+        return password;
+    }
+
+    console.log(generationPassword(8));
+}
